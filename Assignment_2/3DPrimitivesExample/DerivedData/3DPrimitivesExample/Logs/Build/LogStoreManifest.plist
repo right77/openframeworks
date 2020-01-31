@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>10</integer>
+	<key>logs</key>
+	<dict>
+		<key>048AD1FF-22EA-4434-82C7-7004C58D7CF0</key>
+		<dict>
+			<key>className</key>
+			<string>IDEActivityLogSection</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>048AD1FF-22EA-4434-82C7-7004C58D7CF0.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>E</string>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>3DPrimitivesExample project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>3DPrimitivesExample Debug</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Build 3DPrimitivesExample Debug</string>
+			<key>timeStartedRecording</key>
+			<real>601521903.60145402</real>
+			<key>timeStoppedRecording</key>
+			<real>601521915.98187804</real>
+			<key>title</key>
+			<string>Build 3DPrimitivesExample Debug</string>
+			<key>uniqueIdentifier</key>
+			<string>048AD1FF-22EA-4434-82C7-7004C58D7CF0</string>
+		</dict>
+	</dict>
+</dict>
+</plist>
