@@ -5,4 +5,6 @@
 a sceenshot of my C++ Learning status
 ## Screenshots
 
-[![sreenshot](doc/gif.gif)
+![alt text](https://github.com/right77/openframeworks/blob/master/doc/screenshot.png?raw=true"gif")
+
+![alt text](https://github.com/right77/openframeworks/blob/master/doc/capture.gif?raw=true"gif")
