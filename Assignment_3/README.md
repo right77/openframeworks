@@ -35,7 +35,7 @@ https://www.worldweatheronline.com/developer/api/astronomy-api.aspx
 
 1. Who is the user?
 
-Players  
+Players who like puzzle games
 
 2. what do you want them to experience?
 
