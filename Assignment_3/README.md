@@ -47,3 +47,4 @@ Solving the puzzles that how to go to the destination with the limits.
 
 The character who the player is playing is the number which represents the limited number of jumps( or other actions).
 When the character touch another number in the scene, he can get more chances to jump.
+![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_3/Drawing/project3.png?raw=true "project3")
