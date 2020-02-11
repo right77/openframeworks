@@ -14,6 +14,8 @@ The story "Nuwa mended the falled "describes how the Chinese goddess Nuwa repair
 I will design interactions for users to play the role of Nuwa, click the screen and fix the sky.
 Use shapes and animation to show the scene of disaster.
 
+![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_3/Drawing/project1.png?raw=true "Project1")
+
 # Project2
 
 1.Who is the user?
