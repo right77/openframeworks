@@ -29,7 +29,10 @@ Travel to different planet by seeing the sunrise, sunset from different planet.
 I will use the api of weather data of Moon, Mars, and other planets to visualize the sunsets or sunrises which are happening ar present in different planets. Users can view sunrise or sunset at any time, and click in any planets to see more details of the current environment of that planets.
 
 http://ingenology.github.io/mars_weather_api/
+
 https://www.worldweatheronline.com/developer/api/astronomy-api.aspx
+
+![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_3/Drawing/project2.png?raw=true "Project2")
 
 # Project3
 
@@ -47,4 +50,5 @@ Solving the puzzles that how to go to the destination with the limits.
 
 The character who the player is playing is the number which represents the limited number of jumps( or other actions).
 When the character touch another number in the scene, he can get more chances to jump.
-![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_3/Drawing/project3.png?raw=true "project3")
+
+![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_3/Drawing/Project3.png?raw=true "Project3")
