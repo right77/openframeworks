@@ -54,3 +54,12 @@ The character who the player is playing is the number which represents the limit
 When the character touch another number in the scene, he can get more chances to jump.
 
 ![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_3/Drawing/Project3.png?raw=true "Project3")
+
+# Screenshot
+
+![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_3/Drawing/week3.gif?raw=true "GIF")
+
+![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_3/Drawing/face.png?raw=true "Face")
+
+
+
