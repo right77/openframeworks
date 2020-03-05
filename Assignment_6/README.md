@@ -7,6 +7,6 @@
 4. anger
 ## Screenshots
 
-![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_4/img/Screenshot.png?raw=true"screenshot")
 
-![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_4/img/faces.gif?raw=true"gif")
+
+![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_6/img/wk6.gif?raw=true"gif")
