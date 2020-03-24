@@ -6,7 +6,7 @@
 1. change background color
 ![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_7/Screenshots/Color.gif?raw=true"gif")
 2.  Volume
-https://youtu.be/pfTQicw-RX8
+https://youtu.be/-YOubIs042o
 3. A button to switch emotions
 ![alt text](https://github.com/right77/openframeworks/blob/master/Assignment_7/Screenshots/Emotions.gif?raw=true"gif")
 4. Move eyes
