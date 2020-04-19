@@ -1,37 +1,56 @@
 #include "ofApp.h"
 #include<stdlib.h>
 #include<time.h>
-//Project1
-//Nuwa Mended the Falled
+//Openframeworks Project1
+//Nuwa Mended the Falled 女娲补天
+
+//Color 颜色
 ofColor white(255,255,255),black(0,0,0),water(36,93,192),fire(223,88,100);
-ofFbo fbo;
-//ofVec2f
-//nw: nvwa nwa: nvwa's afterimage
+
+//--------------------------------
+//nw: nvwa 女娲 nwa: 方块移动的残影
 ofVec2f nw,nwa;
-//god of Water and god of Fire
+//width height of window
+//nww: width of the nvwa square 方块的边长
+//nwaw: width od the afterimage of nvwa 矩形残影的宽度
+float width,height,nww,nwaw,r1,mX,mY;
+//--------------------------------
+//god of water and fire 水神 火神
 ofVec2f gW,gF;
+//radius of the circle 半径
 float size=40;
+//--------------------------------
 // cppl: create people (C2) 0=target
 ofVec2f n1,n2,cPpl0,cPpl1;
+
 ofVec2f ppl[64],ppl2[64],ppl3[64],ppl4[64],cppl[2];
+//--------------------------------
+int action=0;
+//Record the frameNumber of scene to control trigger of next motion
+//记录到这个Scene的帧数来控制下一动作开始
+int frame[20];
+int Click;// number of mouse clicks 鼠标点击次数
+string NStr[6];//NarrationString 故事旁白
+
+//--------------------------------
 ofFbo fbo1;
+ofFbo fbo;
+
 float dis=-1000;
 //bool
 bool rr=true;
 bool back;
 bool tri[20];
 int tran[9];
-int cue=0;
-int frame[20];
-//int frame0,frame1,frame2;
-int c2Click;
 
+
+
+
+// speed
 float s=0.3f;
 float sRandom[64];
-//width height of window
-//nww: width of the nvwa square
-//nwaw: width od the afterimage of nvwa
-float width,height,nww,nwaw,r1,mX,mY;
+
+
 ofPolyline polyline1;
 
 //c6
@@ -39,7 +58,7 @@ float length,Move;
 //--------------------------------------------------------------
 void ofApp::setup(){
     ofSetFrameRate(60);
-    ofSetWindowTitle("Project1");
+    ofSetWindowTitle("Project 1");
     ofBackground(black);
     ofSetRectMode(OF_RECTMODE_CENTER);
     //fbo
@@ -47,9 +66,9 @@ void ofApp::setup(){
     fbo1.begin();
         ofClear(255,255,255, 0);
     fbo1.end();
+    // width and height of the window
     width=ofGetWidth();
     height=ofGetHeight();
-    
     //ramdon
     srand((unsigned)time(0));
     //Nuwa
@@ -59,11 +78,10 @@ void ofApp::setup(){
     gF.set(width/5, height);
 
     //vec2
-    
     n1.set(ofGetWidth()/5, ofGetHeight()/2);
-    nw.set(n1.x,n1.y);
+    nw.set(ofGetWidth()/5, ofGetHeight()/2);
     
-    //transparancy
+    //random transparancy 点的随机透明度
     for (int i=0; i<=8; i++) {
         tran[i]=10*(2+rand()%9);
     }
@@ -81,8 +99,9 @@ void ofApp::setup(){
     fbo.begin();
       ofClear(255,255,255, 0);
     fbo.end();
-    koliko.load("koliko.ttf", 30, true, true);
-    koliko.setLineHeight(34.0f);
+    
+    title.load("koliko.ttf", 30, true, true);
+    title.setLineHeight(34.0f);
     text.load("koliko.ttf", 15, true, true);
     text.setLineHeight(24.0f);
 }
@@ -93,133 +112,107 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-    
+    //the loop of action1 and action2
+    if(ofGetFrameNum()/240%2==0&&action<2){
+        action=0;
+        rr=true;
+    }
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-    int x=ofGetFrameNum()/60%15;
-    width=ofGetWidth();
-    height=ofGetHeight();
-    ofSetColor(white);
-    
-
-//    ofPath curve;
-//    ofPoint p(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2);
-//    curve.arc(p, 300, 300, 0, 360);
-//    curve.arcNegative(p, 299.5, 299.5, 360, 0);
-//    curve.setArcResolution(60);
-//    curve.draw();
-    //Draw nvwa
-    if(ofGetFrameNum()/240%2==0&&cue<2){
-        cue=0;
-        rr=true;
-    }
-    if(cue==0){
-        MoveNw(width/10*4,height/2);
-        nwa=n1;
-        DrawNwa(width/10*4,0, true);
-        koliko.drawString("Nuwa Mended the Fallen", 550, 300);
-        text.drawString("This is one of many Chinese flood myths ", 550, 360);
-        text.drawString("that reflect the tortuous course of prehistory China.", 550, 400);
-        //This is one of many Chinese flood myths that reflect the tortuous course of prehistory China.
-    }
-    else if (cue==1){
-        MoveNw(width/5, height/2);
-        koliko.drawString("Nuwa Mended the Fallen", 550, 300);
-        text.drawString("This is one of many Chinese flood myths ", 550, 360);
-        text.drawString("that reflect the tortuous course of prehistory China.", 550, 400);
-    }
-    else if(cue==2){
-        MoveNw(mX, mY);
-        creatPeople(mX, mY);
-        for (int i=0; i<=2; i++) {
-            ofDrawRectangle(cppl[i], 5, 5);
-        }
-        text.drawString("It was a lonely world. ", 550, 320);
-        text.drawString("Nv Wa made men by moulding yellow clay.", 550, 360);
-        text.drawString("She got tired but excited.", 550, 400);
-        
-        //she got tired. Then she conveniently drawn a
-        //cane, dipped it into mud and kept slapping the cane on the ground.
-    }
-    else if (cue==3){
-        MoveNw(mX, mY);
-        drawPeople();
-        text.drawString("She conveniently drawn a cane,", 550, 320);
-        text.drawString("dipped it into mud", 550, 360);
-        text.drawString("and kept slapping the cane on the ground.", 550, 400);
-    }
-    else if (cue==4){
-        MoveNw(mX, mY);
-        drawPeople();
-        text.drawString("Mud splashed on the ground.", 550, 340);
-        text.drawString("And all this spot became live human.", 550, 380);
-        
-    }
-    else if( cue==5){
-        MoveNw(mX, mY);
-        drawPeople();
-        text.drawString("This was the beginning of humans.", 550, 380);
-        //Mud splashed on the ground
-    }
-    else if(cue==6){
-        MoveNw(mX,mY);
-        Escape();
-        
-    }
-    else if(cue==7){
-        MoveNw(mX,mY);
-        Meet();
-        ofSetColor(white);
-        text.drawString("The fight of gods resulted in the disasters of the people.", 500, 340);
-        text.drawString("Nuwa, the creator of man, would not allow this to continue.", 500, 380);
-    }
-    else if(cue==8){
-        if(back){
-        MoveNw(mX,mY);
-        }
-        fight2();
-        if(nw.x<width/6){
-            cue=9;
-        }
-        text.drawString("She collected rocks, melted them ", 550, 320);
-        text.drawString("and used the thick liquid to mend the holes.",550,360);
-        //
-    }
-    else if (cue==9){
-        MoveNw(mX,mY);
-        
-        text.drawString("The skey was back in its place.", 550, 380);
-        text.drawString("The rains stopped.", 550, 420);
-        text.drawString("Nuwa died of exhaustion,",550,460);
-        text.drawString("quite content with what she had done to her offspring.",550,500);
-    }
-        
-    
-    
-    
-    
-    
-    //circle
-    
-    
-    
-    
-    
-    
-    
-
-    
-    
-    
+    //动画
+    Motion(action);
 }
+void ofApp::Motion(int m){
+    switch (m) {
+        case 0:
+            MoveNw(width/10*4,height/2);//方块移动
+            nwa.set(ofGetWidth()/5, ofGetHeight()/2);//方块移动
+            DrawNwa(width/10*4,0, true);
+            Narration(action);//方块移动
+            break;
+        case 1:
+            MoveNw(width/5, height/2);
+            Narration(action);
+        break;
+        case 2:
+             //Move to the point which user clicks 移动到鼠标点击的位置
+             MoveNw(mX, mY);
+             //Create people
+             creatPeople(mX, mY);
+             for (int i=0; i<=2; i++) {
+                 ofDrawRectangle(cppl[i], 5, 5);
+             }
+             Narration(action);
+            break;
+        case 3:
+            MoveNw(mX, mY);
+            drawPeople();
+            text.drawString("She conveniently drawn a cane,", 550, 320);
+            text.drawString("dipped it into mud", 550, 360);
+            text.drawString("and kept slapping the cane on the ground.", 550, 400);
+         
+        break;
+        case 4:
+            MoveNw(mX, mY);
+            drawPeople();
+            text.drawString("Mud splashed on the ground.", 550, 340);
+            text.drawString("And all this spot became live human.", 550, 380);
+         
+        break;
+        case 5:
 
+            MoveNw(mX, mY);
+            drawPeople();
+            text.drawString("This was the beginning of humans.", 550, 380);
+            //Mud splashed on the ground
+             
+            break;
+        case 6:
+            MoveNw(mX,mY);
+            Escape();
+         
+        break;
+        case 7:
+            MoveNw(mX,mY);
+            Meet();
+            ofSetColor(white);
+            text.drawString("The fight of gods resulted in the disasters of the people.", 500, 340);
+            text.drawString("Nuwa, the creator of man, would not allow this to continue.", 500, 380);
+         
+        break;
+        case 8:
+            if(back){
+            MoveNw(mX,mY);
+            }
+            Fight2();
+            if(nw.x<width/6){
+                action=9;
+            }
+            text.drawString("She collected rocks, melted them ", 550, 320);
+            text.drawString("and used the thick liquid to mend the holes.",550,360);
+            break;
+        case 9:
+            MoveNw(mX,mY);
+
+            text.drawString("The skey was back in its place.", 550, 380);
+            text.drawString("The rains stopped.", 550, 420);
+            text.drawString("Nuwa died of exhaustion,",550,460);
+            text.drawString("quite content with what she had done to her offspring.",550,500);
+        break;
+        
+            
+        default:
+            break;
+    }
+}
 //--------------------------------------------------------------
 void ofApp::MoveNw(float m, float n){
+    ofVec2f target(m,n);
+    nw=nw+(target-nw)*s;
     
-    nw.x+=s*(m-nw.x);
-    nw.y+=s*(n-nw.y);
+    ofSetColor(white);
     ofDrawRectangle(nw, nww,nww);
     
 }
@@ -237,12 +230,10 @@ void ofApp::DrawNwa(float m, float n,bool bWH){
     }
 }
 void ofApp::drawPeople(){
-    if (cue==3) {
+    if (action==3) {
         for (int i=0;i<8;i++){
             for (int n=0; n<8; n++) {
                 int m=n*8+i;
-                
-                
                 ofSetLineWidth(2);
                 if(ppl2[m].x<ppl[m].x-width/20-0.1f){
                       ppl2[m].x+=s*(ppl[m].x-width/32-ppl2[m].x)/sRandom[m];
@@ -265,7 +256,7 @@ void ofApp::drawPeople(){
             }
         }
     }
-    else if(cue==4){
+    else if(action==4){
         
         for (int i=0;i<8;i++){
             for (int n=0; n<8; n++) {
@@ -295,7 +286,7 @@ void ofApp::drawPeople(){
         }
     }
     
-    else if(cue==5){
+    else if(action==5){
         
         for (int i=0;i<8;i++){
             for (int n=0; n<8; n++) {
@@ -377,7 +368,7 @@ void ofApp::Meet(){
     }
     //gw and gf are fighting
 //    fbo.begin();
-    fight();
+    Fight();
     
 //    ofSetColor(black,10);
 //    ofDrawRectangle(width/2, height/2, width, height);
@@ -387,7 +378,7 @@ void ofApp::Meet(){
     
 }
 
-void ofApp::fight(){
+void ofApp::Fight(){
         //gw and gf are fighting
     //    fbo.begin();
     size+=(120-size)*s/8;
@@ -409,7 +400,7 @@ void ofApp::fight(){
         cout<<height/2-gW.y<<endl;
     }
     if((ofGetFrameNum()-frameFight)/60%6==3){
-        cue=8;
+        action=8;
     }
         ofSetColor(fire);
         ofDrawCircle(gF, size);
@@ -423,7 +414,7 @@ void ofApp::fight(){
     //    fbo.draw(0,0);
     //
 }
-void ofApp::fight2(){
+void ofApp::Fight2(){
     ofSetColor(white,60);
     ofDrawCircle(0, height/2, height/2);
     nw.x++;
@@ -480,34 +471,52 @@ void ofApp::mouseDragged(int x, int y, int button){
 void ofApp::mousePressed(int x, int y, int button){
     
     if(button==0){
-        cout<<"click"<<endl;
-        if(cue<2){
+        //cout<<"click"<<endl;
+        if(action<2){
             frame[1]=ofGetFrameNum();
             //cout<<cue<<endl;
-            cue=2;
-            cout<<"cue="<<cue<<endl;
+            action=2;
+            cout<<"m="<<action<<endl;
         }
-        if(cue==2){
-            cout<<cue<<endl;
-            int mouseClick;
-            c2Click++;
+        if(action==2){
+            cout<<"m="<<action<<endl;
+            //int mouseClick;
             //cout<<c2Click<<endl;
             mX=x;
             mY=y;
             cPpl1.set(x, y);
             cPpl0.set(x+rand()%12*20,y);
-            if(c2Click>=1&&c2Click<4){
-                cppl[c2Click-1].set(cPpl0.x,cPpl1.y);
+        
+            switch (Click) {
+                case 0:
+                    cppl[Click-1].set(cPpl0.x,cPpl1.y);
+                    Click++;
+                    cout<<"click="<<Click<<endl;
+                    break;
+                case 1:
+                    cppl[Click-1].set(cPpl0.x,cPpl1.y);
+                    Click++;
+                    cout<<"click="<<Click<<endl;
+                break;
+                case 2:
+                    cppl[Click-1].set(cPpl0.x,cPpl1.y);
+                    Click++;
+                    cout<<"click="<<Click<<endl;
+                    break;
+                case 3:
+                    frame[2]=ofGetFrameNum();
+                    mX=x;
+                    mY=y;
+                    action=3;
+                    cout<<"m="<<action<<endl;
+                    break;
+                    
+                default:
+                    break;
             }
-            if (c2Click==4){
-                frame[2]=ofGetFrameNum();
-                mX=x;
-                mY=y;
-                cue=3;
-                cout<<"cue="<<cue<<endl;
-            }
+           
         }
-        if (cue==3) {
+        if (action==3) {
             if (tri[3]) {
                 mX=x;
                 mY=y;
@@ -521,11 +530,11 @@ void ofApp::mousePressed(int x, int y, int button){
                     }
                 }
                 frame[3]=ofGetFrameNum();
-                cue=4;
-                cout<<"cue="<<cue<<endl;
+                action=4;
+                cout<<"cue="<<action<<endl;
             }
         }
-        if (cue==4) {
+        if (action==4) {
             if(tri[4]){
                 mX=x;
                 mY=y;
@@ -539,29 +548,29 @@ void ofApp::mousePressed(int x, int y, int button){
                     }
                 }
                     frame[4]=ofGetFrameNum();
-                    cue=5;
-                    cout<<"cue="<<cue<<endl;
+                    action=5;
+                    cout<<"cue="<<action<<endl;
                 }
         }
-        if (cue==5) {
+        if (action==5) {
             if(tri[5]){
                 mX=x;
                 mY=y;
                     frame[5]=ofGetFrameNum();
-                    cue=6;
-                    cout<<"cue="<<cue<<endl;
+                    action=6;
+                    cout<<"cue="<<action<<endl;
                 }
         }
-        if (cue==6) {
+        if (action==6) {
             if(tri[6]){
                 mX=x;
                 mY=y;
                     frame[6]=ofGetFrameNum();
-                    cue=7;
-                    cout<<"cue="<<cue<<endl;
+                    action=7;
+                    cout<<"cue="<<action<<endl;
                 }
         }
-        if (cue==8){
+        if (action==8){
             back=true;
             
             mX=x;
@@ -634,7 +643,7 @@ void ofApp::s1(){
             ofTranslate(0, 0);
             ofPopMatrix();
             if (r1>360) {
-                cue=1;
+                action=1;
                 //cout<<"8"<<endl;
             }
             }
@@ -652,3 +661,57 @@ void ofApp::ClickGetM(int x, int y){
     mX=x;
     mY=y;
 }
+//--------------------------------------------------------------
+//旁白
+void ofApp::Narration(int i){
+    
+    switch (i) {
+        case 0:
+            NStr[0]="Suddenly she woke up.";
+            NStr[1]="She seemed to wake from a dream,";
+            NStr[2]="but could not remermber what it is.";
+            NStr[3]="She rubbed her eyes,";
+            NStr[4]="and then wander in this unknown world.";
+            title.drawString("Nuwa Mended the Fallen", 525, 260);
+            drawString(5);
+            break;
+        case 1:
+            NStr[0]="Suddenly she woke up.";
+            NStr[1]="She seemed to wake from a dream,";
+            NStr[2]="but could not remermber what it is.";
+            NStr[3]="She rubbed her eyes,";
+            NStr[4]="and then wander in this unknown world.";
+            title.drawString("Nuwa Mended the Fallen", 525, 260);
+            drawString(5);
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            break;
+        case 6:
+            break;
+        case 7:
+            break;
+        case 8:
+            break;
+        default:
+            break;
+    }
+}
+void ofApp::drawString(int n){
+    //text X; text Y
+    int tX=525;
+    int tY[6]={300,340,380,420,460,500};
+    for (int i=0; i<n; i++) {
+        text.drawString(NStr[i], tX, tY[i]);
+    }
+}
+//    ofPath curve;
+//    ofPoint p(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2);
+//    curve.arc(p, 300, 300, 0, 360);
+//    curve.arcNegative(p, 299.5, 299.5, 360, 0);
+//    curve.setArcResolution(60);
+//    curve.draw();
